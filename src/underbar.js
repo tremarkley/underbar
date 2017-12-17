@@ -107,6 +107,18 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var result = [];
+    var temp_arr = [];
+
+    _.each(array, function(item, index) {
+      var temp = iterator != undefined ? iterator(item) : item;
+      
+      if (_.indexOf(temp_arr, temp) === -1){
+        temp_arr.push(temp);
+        result.push(item);
+      }
+    })
+    return result;
   };
 
 
