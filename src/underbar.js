@@ -175,7 +175,6 @@
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
     _.each(collection, function(item, index) {
-      console.log(item);
       if (accumulator == undefined & index === 0){
         accumulator = item;
       }
@@ -212,7 +211,7 @@
         return true; }
       else {
         return false;
-      };
+      }
     }, true);
   };
 
@@ -220,6 +219,21 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    if (!iterator) { iterator = _.identity; }
+    var pass = iterator;
+    if (_.every(collection, function(item) {
+      if (!iterator(item)){
+        return true; //if every item fails the truth test then every = true
+      }
+      else {
+        return false;
+      }
+    })) {
+      return false; //if every = true then every item failed the truth test, thus some equals false
+    }
+    else {
+      return true;
+    }
   };
 
 
