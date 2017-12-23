@@ -269,6 +269,20 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    var mergeObject = arguments[0];
+    for (let i = 1; i < arguments.length; i++)
+    {
+      _.each(arguments[i], function(value, key) {
+        if (mergeObject[key] !== undefined)
+        {
+          //dont do anything
+        }
+        else {
+          mergeObject[key] = value;
+        }
+      })
+    }
+    return mergeObject;
   };
 
 
